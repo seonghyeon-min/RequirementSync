@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 20px;
+}
+
+#draggable-container {
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    overflow-x: auto;  /* 가로 스크롤 추가 */
+}
+
+.draggable {
+    padding: 15px;
+    background-color: #e0e0e0;
+    border: 1px solid #999;
+    border-radius: 5px;
+    cursor: grab;
+    transition: background-color 0.2s;
+}
+
+#requirements-container {
+    border: 2px solid #007BFF;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f0f8ff;
+    min-height: 150px;   /* 최소 높이 */
+    max-height: 300px;   /* 최대 높이 */
+    overflow-y: auto;    /* 세로 스크롤 활성화 */
+    margin-top: 20px;    /* 상단 여백 추가 */
+}
+
+#requirements-container h3 {
+    margin: 0;
+}
+
+.dropped-item {
+    padding: 5px;
+    background-color: #d1e7dd;
+    border: 1px solid #0f5132;
+    border-radius: 5px;
+    margin-top: 5px;
+}

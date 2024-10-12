@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draggable Component</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 20px;
+        }
+
+        #draggable-container {
+            display: flex;
+            gap: 15px;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            overflow-x: auto;  /* 가로 스크롤 추가 */
+        }
+
+        .draggable {
+            padding: 15px;
+            background-color: #e0e0e0;
+            border: 1px solid #999;
+            border-radius: 5px;
+            cursor: grab;
+            transition: background-color 0.2s;
+        }
+
+        #requirements-container {
+            border: 2px solid #007BFF;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #f0f8ff;
+            max-height: 300px;   /* 최대 높이 */
+            overflow-y: auto;    /* 세로 스크롤 활성화 */
+            margin-top: 20px;    /* 상단 여백 추가 */
+        }
+
+        #requirements-container h3 {
+            margin: 0;
+        }
+
+        .dropped-item {
+            padding: 5px;
+            background-color: #d1e7dd;
+            border: 1px solid #0f5132;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>드래그 가능한 아이템</h2>
+    <div id="draggable-container">
+        <div class="draggable" draggable="true">com.webos.app.homeoffice</div>
+        <div class="draggable" draggable="true">com.webos.app.totalmusic</div>
+        <div class="draggable" draggable="true">com.webos.app.gamehome</div>
+        <div class="draggable" draggable="true">com.webos.app.sportsteamsettins</div>
+        <div class="draggable" draggable="true">com.webos.app.accessibility</div>
+        <div class="draggable" draggable="true">com.webos.app.weather</div>
+        <div class="draggable" draggable="true">com.webos.app.news</div>
+    </div>
+
+    <h3>요구사항</h3>
+    <div id="requirements-container">
+        <h3>드롭된 아이템:</h3>
+        <div id="dropped-items"></div>  <!-- 드롭된 아이템을 표시할 영역 -->
+    </div>
+
+    <script>
+        const draggables = document.querySelectorAll('.draggable');
+        const requirementsContainer = document.getElementById('requirements-container');
+        const droppedItems = document.getElementById('dropped-items');
+
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', () => {
+                draggable.classList.add('dragging');
+            });
+
+            draggable.addEventListener('dragend', () => {
+                draggable.classList.remove('dragging');
+            });
+        });
+
+        requirementsContainer.addEventListener('dragover', (event) => {
+            event.preventDefault();  // 기본 동작 방지
+        });
+
+        requirementsContainer.addEventListener('drop', (event) => {
+            event.preventDefault();
+            const dragging = document.querySelector('.dragging');
+            if (dragging) {
+                const newItem = document.createElement('div');
+                newItem.textContent = dragging.textContent;  // 드래그한 아이템의 텍스트 가져오기
+                newItem.className = 'dropped-item';          // 클래스 추가
+                droppedItems.appendChild(newItem);            // 요구사항 컨테이너에 추가
+            }
+        });
+    </script>
+</body>
+</html>
